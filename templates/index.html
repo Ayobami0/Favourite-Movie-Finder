@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      {% set message_class = 'alert-success' %}
+      {% if category == 'error' %}
+        {% set message_class = 'alert-danger'%}
+      {% endif %}
+      <div class="alert {{ message_class }} 
+        alert-dismissable fade in">
+        {{ message }}
+        <button type="button" class="close" 
+          aria-label="Close" aria-hidden="true" data-dismiss="alert">
+          &times;
+        </button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<h2>Search results:</h2>
+<div class="card display-card">
+  <img class="card-img-top poster-img" 
+  src="{{ movie_data['poster'] }}" alt="poster">
+  <div class='card-body'>
+    <h2 class="card-text">{{ movie_data['title'] }}</h2>
+    <p class="card-text">{{ movie_data['year'] }}</p>
+    <p class="card-text">{{ movie_data['plot'] }}</p>
+    <form method="POST">
+      <div class="btn-group-vertical" role="group">
+        <button type="submit" class="btn btn-primary fav-btn" 
+          name="fav_toggle" value="add" {{ in_fav }}>Add to Favourites</button>
+        <button type="submit" class="btn 
+          btn-danger fav-btn" name="fav_toggle" value="remove" >Remove from Favourites</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

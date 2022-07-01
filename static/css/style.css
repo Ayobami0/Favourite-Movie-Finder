@@ -1,0 +1,47 @@
+body {
+  padding-top: 60px;
+}
+.card{
+  display: flex;
+  flex-direction: row-reverse;
+  border: solid lightgray 1px;
+  border-radius: 20px;
+  width: fit-content;
+  margin: 10px;
+
+}
+.card-img-top{
+  border-radius: 0 20px 20px 0;
+}
+.card-body{
+  margin-left: 10px;
+}
+div.container + form{
+  flex-direction: column;
+}
+.panel-default{
+  margin: auto 5px auto 5px;
+}
+div.col-sm-6{
+  display: flex;
+  flex-direction: row;
+  height: 120px;
+  border: 1px lightgrey solid;
+  border-radius: 5px;
+  width: 95%;
+  margin-left: auto; 
+  margin-right: auto;
+}
+.card-img{
+  margin: 5px 0 5px auto;
+  border-radius: 4px;
+}
+.fav-btn{
+  margin: 10px auto 10px auto;
+}
+.poster-img{
+  margin: 10px;
+}
+.alert{
+  margin: 10px auto 10px auto;
+}
