@@ -1,1 +1,1 @@
-web: guincorn main:app --log-file=-
+web: guincorn main:app
