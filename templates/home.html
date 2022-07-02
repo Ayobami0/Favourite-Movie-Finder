@@ -1,7 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form method="post">
-  <input type="text" name="" value="" class="form-control">
-</form>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      {% set message_class = 'alert-success' %}
+      {% if category == 'error' %}
+        {% set message_class = 'alert-danger'%}
+      {% endif %}
+      <div class="alert {{ message_class }}
+        alert-dismissable fade in">
+        {{ message }}
+        <button type="button" class="close"
+          aria-label="Close" aria-hidden="true" data-dismiss="alert">
+          &times;
+        </button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<div class="top-pad" style="margin: 10px;">
+  <form method='POST' action='/'>
+    {{ wtf.quick_form(form) }}
+  </form>
+</div>
+<div class="container">
+  <h2>Favourites</h2>
+  <div class="well">
+    {% for movie in favourite_movies %}
+    <div class="container fav-card">
+      <div class="card-body">
+        <h5 class="card-title">{{ movie['Title'] }}</h5>
+        <p class="card-text">{{ movie['Year'] }}</p>
+        <form method="POST">
+          <a type='button' role="button" class="btn btn-info btn-sm fav-btn"
+                           href="{{ url_for('hello.movie_page', movie_title=movie['Title']) }}">
+            Movie Info</a>
+        </form>
+      </div>
+      <img src="{{ movie['Poster'] }}" class="card-img"></img>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      {% set message_class = 'alert-success' %}
+      {% if category == 'error' %}
+        {% set message_class = 'alert-danger'%}
+      {% endif %}
+      <div class="alert {{ message_class }} 
+        alert-dismissable fade in">
+        {{ message }}
+        <button type="button" class="close" 
+          aria-label="Close" aria-hidden="true" data-dismiss="alert">
+          &times;
+        </button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<div class="container">
+  <div class="well">
+    <div class="container" style="display: flex; justify-content: center;">
+      <img class="img-rounded "  
+      src="{{ movie_data['Poster'] }}" alt="Poster">
+    </div>
+    <div class='cointainer'>
+      <h2 class="card-text">{{ movie_data['Title'] }}</h2>
+      <p class="card-text">Date Released: {{ movie_data['Released'] }}</p>
+      <p class"card-text">Runtime: {{ movie_data['Runtime'] }}</p>
+      <p class="card-text">Actors: {{ movie_data['Actors'] }}</p>
+      <p>Genre: {{ movie_data['Genre'] }}</p>
+      <p class="card-text">{{ movie_data['Plot'] }}</p>
+      <span>Ratings:</span>
+      <div class="list-inline">
+      {% for rating in movie_data['Ratings'] %}
+        <li class="card-text">
+          {{ rating['Source'] }}: {{ rating['Value'] }}
+        </li>
+      {% endfor %}
+      </div>
+    </div>
+    <div class='container'>
+      <form method="POST">
+        <button type="submit" class="btn btn-primary fav-btn" 
+          name="fav_toggle" value="add" {{ in_fav }}>Add to Favourites</button>
+        <button type="submit" class="btn 
+          btn-danger fav-btn" name="fav_toggle" value="remove" >Remove from Favourites</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

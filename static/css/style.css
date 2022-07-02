@@ -1,18 +1,6 @@
 body {
   padding-top: 60px;
 }
-.card{
-  display: flex;
-  flex-direction: row-reverse;
-  border: solid lightgray 1px;
-  border-radius: 20px;
-  width: fit-content;
-  margin: 10px;
-
-}
-.card-img-top{
-  border-radius: 0 20px 20px 0;
-}
 .card-body{
   margin-left: 10px;
 }
@@ -22,15 +10,10 @@ div.container + form{
 .panel-default{
   margin: auto 5px auto 5px;
 }
-div.col-sm-6{
+div.fav-card{
   display: flex;
   flex-direction: row;
   height: 120px;
-  border: 1px lightgrey solid;
-  border-radius: 5px;
-  width: 95%;
-  margin-left: auto; 
-  margin-right: auto;
 }
 .card-img{
   margin: 5px 0 5px auto;
@@ -45,3 +28,27 @@ div.col-sm-6{
 .alert{
   margin: 10px auto 10px auto;
 }
+.movie-card{
+  display: flex;
+  flex-direction: row;
+}
+.image-card{
+  margin-left: auto;
+}
+ /* Pagination links */
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+
+/* Style the active/current link */
+.pagination a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+/* Add a grey background color on mouse-over */
+.pagination a:hover:not(.active) {background-color: #ddd;} 

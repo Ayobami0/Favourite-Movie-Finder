@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+  <h1>Search Result:</h1>
+</div>
+<div class="container">
+{% for movie in result %}
+  <div class="well movie-card">
+      <div class="col">
+        <h2>{{ movie['Title'] }}</h2>
+        <p>{{ movie['Year'] }}</p>
+        <p>{{ movie['imdbID'] }}<p>
+        <a type='button' role="button" 
+                         class="btn btn-info btn-sm fav-btn"
+                         href="{{ url_for('hello.movie_page', movie_title=movie['Title']) }}">Movie Info</a>
+      </div>
+      <div class="col image-card">
+        <img src="{{ movie['Poster'] }}" alt="None">
+      </div>
+  </div>
+{% endfor %}
+</div>
+<div>
+  {# If statement to check if the pagination bar #}
+  {# is at the beginning or end #}
+    {% if page == 1 %}
+      {% set disabled='disabled' %}
+      {% set first_page_url='#' %}
+      {% set first_placeholder = empty %}
+    {% else %}
+      {% set disabled = '' %}
+      {% set first_page_url = url_for('hello.search_result', page=page-1, title=title) %}
+      {% set first_placeholder = page-1 %}
+    {% endif %}
+    {% if page == total_page %}
+      {% set disabled='disabled' %}
+      {% set last_page_url='#' %}
+      {% set last_placeholder = empty %}
+    {% else %}
+      {% set disabled = '' %}
+      {% set last_page_url = url_for('hello.search_result', page=page+1, title=title) %}
+      {% set last_placeholder = page+1 %}
+    {% endif %}
+  <ul class="pagination" style="display: flex; justify-content: center">
+    <li class="page-item">
+      <a class="page-link" href="{{ first_page_url }}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    <li class="page-item "><a class="page-link {{ disabled }}" href="{{ first_page_url }}">{{ first_placeholder }}</a></li>
+    <li class="page-item"><a class="page-link" href="{{ url_for('hello.search_result', page=page, title=title) }}">{{ page }}</a></li>
+    <li class="page-item"><a class="page-link {{ disabled }}" href="{{ last_page_url }}">{{ last_placeholder }}</a></li>
+    <li class="page-item">
+      <a class="page-link" href="{{ last_page_url }}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+  </ul>
+</div>  
+{% endblock %}
