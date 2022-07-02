@@ -30,7 +30,9 @@ div.fav-card{
 }
 .movie-card{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  /* width: fit-content; */
 }
 .image-card{
   margin-left: auto;
